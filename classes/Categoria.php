@@ -1,4 +1,5 @@
 <?php
+require_once "classes/Conexao.php";
 
 class Categoria
 {
@@ -6,12 +7,17 @@ class Categoria
     public $id;
     public $nome;
 
-    public function listar()
-    {
+    public function listar() {
         $query = "SELECT id, nome FROM categorias";
-        $conexao = new PDO('mysql:host=127.0.0.1;dbname=estoque', 'root', '123456');
+        $conexao = Conexao::pegarConexao();
         $resultado = $conexao->query($query);
         $lista = $resultado->fetchAll();
         return $lista;
+    }
+
+    public function inserir($nome) {
+        $query = "INSERT INTO categorias (nome) VALUES ('" . $this->nome . "')";
+        $conexao = Conexao::pegarConexao();
+        $conexao->exec($query);
     }
 }
