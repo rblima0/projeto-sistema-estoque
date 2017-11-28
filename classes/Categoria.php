@@ -1,4 +1,4 @@
-<?php require_once "classes/Conexao.php";
+<?php
 
 class Categoria
 {

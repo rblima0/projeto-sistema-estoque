@@ -2,7 +2,7 @@
 
 class Conexao {
     public static function pegarConexao(){
-        $conexao = new PDO('mysql:host=127.0.0.1;dbname=estoque', 'root', '123456');
+        $conexao = new PDO(DB_DRIVE . ':host=' .  DB_HOSTNAME . ';dbname=' . DB_DATABASE, DB_USERNAME, DB_PASSWORD);
         return $conexao;
     }
 }
