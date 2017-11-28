@@ -6,6 +6,13 @@ class Categoria
     public $id;
     public $nome;
 
+    public function __construct($id = false) {
+        if($id) {
+            $this->id = $id;
+            $this->carregar();
+        }
+    }
+
     public function listar() {
         $query = "SELECT id, nome FROM categorias";
         $conexao = Conexao::pegarConexao();
@@ -20,7 +27,7 @@ class Categoria
         $resultado = $conexao->query($query);
         $lista = $resultado->fetchAll();
         foreach ($lista as $linha) {
-            return $linha;
+            $this->nome = $linha["nome"];
         }
     }
 
@@ -33,7 +40,7 @@ class Categoria
     public function atualizar() {
         $query = "UPDATE categorias set nome = '" . $this->nome . "' WHERE id = " . $this->id;
         $conexao = Conexao::pegarConexao();
-        $conecao->exec($query);
+        $conexao->exec($query);
     }
 
 }
