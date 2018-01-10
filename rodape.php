@@ -1,6 +1,6 @@
 <hr>
 <footer>
-    <p>&copy; 2017 Controle de Estoque</p>
+    <p>&copy; 2018 Controle de Estoque</p>
 </footer>
 </div>
 </body>
