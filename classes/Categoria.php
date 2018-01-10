@@ -24,34 +24,42 @@ class Categoria
 
     public function carregar() {
         //throw new Exception("Erro ao carregar a CATEGORIA");
-        $query = "SELECT id, nome FROM categorias WHERE id = " . $this->id;
+        $query = "SELECT id, nome FROM categorias WHERE id = :id";
         $conexao = Conexao::pegarConexao();
-        $resultado = $conexao->query($query);
-        $lista = $resultado->fetchAll();
-        foreach ($lista as $linha) {
-            $this->nome = $linha["nome"];
-        }
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue(':id', $this->id);
+        $stmt->execute();
+
+        $linha = $stmt->fetch();
+        $this->nome = $linha["nome"];
     }
 
     public function inserir($nome) {
         //throw new Exception("Erro ao Inserir CATEGORIA");
-        $query = "INSERT INTO categorias (nome) VALUES ('" . $this->nome . "')";
+        $query = "INSERT INTO categorias (nome) VALUES (:nome)";
         $conexao = Conexao::pegarConexao();
-        $conexao->exec($query);
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue(':nome', $this->nome);
+        $stmt->execute();
     }
 
     public function atualizar() {
         //throw new Exception("Erro ao atualizar CATEGORIA");
-        $query = "UPDATE categorias set nome = '" . $this->nome . "' WHERE id = " . $this->id;
+        $query = "UPDATE categorias set nome = :nome WHERE id = :id";
         $conexao = Conexao::pegarConexao();
-        $conexao->exec($query);
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue(':nome', $this->nome);
+        $stmt->bindValue(':id', $this->id);
+        $stmt->execute();
     }
 
     public function excluir(){
         //throw new Exception("Erro ao excluir CATEGORIA");
-        $query = "DELETE FROM categorias WHERE id = " . $this->id;
+        $query = "DELETE FROM categorias WHERE id = :id";
         $conexao = Conexao::pegarConexao();
-        $conexao->exec($query);
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue(':id', $this->id);
+        $stmt->execute();
     }
 
 }

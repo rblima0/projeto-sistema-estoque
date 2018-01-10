@@ -13,7 +13,7 @@
         $produto->quantidade = $quantidade;
         $produto->categoria_id = $categoria_id;
 
-        $categoria->inserir(); // Chamamos o metodo
+        $produto->inserir(); // Chamamos o metodo
     
         header('Location: produtos.php');
     } catch(Exception $e) {
