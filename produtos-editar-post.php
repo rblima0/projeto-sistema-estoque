@@ -8,7 +8,7 @@
         $quantidade = $_POST['quantidade'];
         $categoria_id = $_POST['categoria_id'];
     
-        $produto = new produto($id);
+        $produto = new Produto($id);
         
         $produto->nome = $nome;
         $produto->preco = $preco;

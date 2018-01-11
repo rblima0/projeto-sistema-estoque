@@ -62,4 +62,12 @@ class Produto {
         $stmt->bindValue(':categoria_id', $this->categoria_id);
         $stmt->execute();
     }
+
+    public function excluir(){
+        $query = "DELETE FROM produtos WHERE id = :id";
+        $conexao = Conexao::pegarConexao();
+        $stmt = $conexao->prepare($query);
+        $stmt->bindValue(':id', $this->id);
+        $stmt->execute();
+    }
 }
